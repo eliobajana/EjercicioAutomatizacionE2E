@@ -10,28 +10,20 @@ using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using NUnit.Framework;
+using EjercicioAutomatizacionE2E.PageObjects;
 
 namespace EjercicioAutomatizacionE2E
 {
     public class ComprasUnitTest
     {
-        private IWebDriver driver;
-
-        public IDictionary<string, object> vars { get; private set; }
-        private IJavaScriptExecutor js;
-       // private Alert alert = driver.LinkText("Add to cart").alert();
+        private IWebDriver driver;   
 
         [SetUp]
         public void Setup()
         {
             var DriverFolder = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @".\Resourses\");
-            Console.WriteLine(DriverFolder);
-
             driver = new ChromeDriver(DriverFolder);
 
-            js = (IJavaScriptExecutor)driver;
-            vars = new Dictionary<string, object>();
-            //Alert alert = driver.switchTo().alert();
         }
 
         [TearDown]
@@ -43,160 +35,62 @@ namespace EjercicioAutomatizacionE2E
         [Test]
         public void CompraDatosCorrectos()
         {
+            MetodosComunes mc = new MetodosComunes(driver);
+            HomePage Home = new HomePage(driver);
+            CartPage cart = new CartPage(driver);
 
-            driver.Navigate().GoToUrl("https://www.demoblaze.com/");
-            driver.Manage().Window.Maximize();
-            Thread.Sleep(1000);
+            try {
 
-            driver.FindElement(By.Id("itemc")).Click();
-            Thread.Sleep(1000);
+                mc.IngresarURL();
 
-            driver.FindElement(By.LinkText("Samsung galaxy s6")).Click();
-            Thread.Sleep(1000);
+                Home.SeleccionarArticulos("Samsung galaxy s6", "Sony vaio i7");
 
-            driver.FindElement(By.LinkText("Add to cart")).Click();
-            Thread.Sleep(1000);
+                cart.Comprar();
 
-            Assert.That(driver.SwitchTo().Alert().Text, Is.EqualTo("Product added"));
-            Thread.Sleep(1000);
-            driver.SwitchTo().Alert().Accept();
+                cart.IngresarDatos("Elio Bajaña", "Ecuador", "Guayaquil", "4111 1111 1111 1111", "05", "2023");
 
-            Thread.Sleep(1000);
-            driver.FindElement(By.CssSelector(".active > .nav-link")).Click();
-            Thread.Sleep(1000);
+                cart.ProcesarPago();
 
-            driver.FindElement(By.LinkText("Laptops")).Click();
-            Thread.Sleep(1000);
+                Assert.Pass("Prueba Ejecutada Exitosamente");              
+            }
+            catch(SystemException ex)
+            {
+                Assert.Fail("Error en la Ejecucion por: " + ex);
 
-            driver.FindElement(By.LinkText("Sony vaio i7")).Click();
-            Thread.Sleep(1000);
+            }
 
-            driver.FindElement(By.LinkText("Add to cart")).Click();
-            Thread.Sleep(1000);
-
-            Assert.That(driver.SwitchTo().Alert().Text, Is.EqualTo("Product added"));
-            Thread.Sleep(1000);
-            driver.SwitchTo().Alert().Accept();
-
-
-            Thread.Sleep(1000);
-            driver.FindElement(By.Id("cartur")).Click();
-            Thread.Sleep(1000);
-
-            driver.FindElement(By.CssSelector(".btn-success")).Click();
-            Thread.Sleep(1000);
-
-            driver.FindElement(By.Id("name")).Click();
-            Thread.Sleep(1000);
-
-            driver.FindElement(By.Id("name")).SendKeys("Elio Bajaña");
-            Thread.Sleep(1000);
-
-            driver.FindElement(By.Id("country")).Click();
-
-            driver.FindElement(By.Id("country")).SendKeys("Ecuador");
-
-            driver.FindElement(By.Id("city")).Click();
-
-            driver.FindElement(By.Id("city")).SendKeys("Guayaquil");
-
-            driver.FindElement(By.Id("card")).Click();
-
-            driver.FindElement(By.Id("card")).SendKeys("4000000011111111");
-
-            driver.FindElement(By.Id("month")).Click();
-
-            driver.FindElement(By.Id("month")).SendKeys("05");
-
-            driver.FindElement(By.Id("year")).Click();
-
-            driver.FindElement(By.Id("year")).SendKeys("2025");
-            Thread.Sleep(1000);
-
-            driver.FindElement(By.CssSelector("#orderModal .btn-primary")).Click();
-            Thread.Sleep(1000);
-
-            driver.FindElement(By.CssSelector(".confirm")).Click();
         }
 
         [Test]
         public void CompraDatosIncorrectos()
         {
-            driver.Navigate().GoToUrl("https://www.demoblaze.com/");
-            driver.Manage().Window.Maximize();
-            Thread.Sleep(1000);
+            MetodosComunes mc = new MetodosComunes(driver);
+            HomePage Home = new HomePage(driver);
+            CartPage cart = new CartPage(driver);
 
-            driver.FindElement(By.Id("itemc")).Click();
-            Thread.Sleep(1000);
+            try
+            {
 
-            driver.FindElement(By.LinkText("Samsung galaxy s6")).Click();
-            Thread.Sleep(1000);
+                mc.IngresarURL();
 
-            driver.FindElement(By.LinkText("Add to cart")).Click();
-            Thread.Sleep(1000);
+                Home.SeleccionarArticulos("Samsung galaxy s6", "Sony vaio i7");
 
-            Assert.That(driver.SwitchTo().Alert().Text, Is.EqualTo("Product added"));
-            Thread.Sleep(1000);
-            driver.SwitchTo().Alert().Accept();
+                cart.Comprar();
 
-            Thread.Sleep(1000);
-            driver.FindElement(By.CssSelector(".active > .nav-link")).Click();
-            Thread.Sleep(1000);
+                cart.IngresarDatos("ZQWQWQW14455", "DS4455", "DS4444", "XXXW33 -.L/* 620..$ $$5%%", "EEEE", "4EFFF/*");
 
-            driver.FindElement(By.LinkText("Laptops")).Click();
-            Thread.Sleep(1000);
+                cart.ProcesarPago();
 
-            driver.FindElement(By.LinkText("Sony vaio i7")).Click();
-            Thread.Sleep(1000);
-
-            driver.FindElement(By.LinkText("Add to cart")).Click();
-            Thread.Sleep(1000);
-
-            Assert.That(driver.SwitchTo().Alert().Text, Is.EqualTo("Product added"));
-            Thread.Sleep(1000);
-            driver.SwitchTo().Alert().Accept();
+                Assert.Fail("Realiza la Compra a pesar de Ingresar Datos invalidos");
 
 
-            Thread.Sleep(1000);
-            driver.FindElement(By.Id("cartur")).Click();
-            Thread.Sleep(1000);
+            }
+            catch (SystemException ex)
+            {
+                Assert.Fail("Error en la Ejecucion por: " + ex);
 
-            driver.FindElement(By.CssSelector(".btn-success")).Click();
-            Thread.Sleep(1000);
+            }
 
-            driver.FindElement(By.Id("name")).Click();
-            Thread.Sleep(1000);
-
-            driver.FindElement(By.Id("name")).SendKeys("sadsadsds asdsa");
-            Thread.Sleep(1000);
-
-            driver.FindElement(By.Id("country")).Click();
-
-            driver.FindElement(By.Id("country")).SendKeys("sadsadewdrw");
-
-            driver.FindElement(By.Id("city")).Click();
-
-            driver.FindElement(By.Id("city")).SendKeys("erewtre");
-
-            driver.FindElement(By.Id("card")).Click();
-
-            driver.FindElement(By.Id("card")).SendKeys("tretretrtr");
-
-            driver.FindElement(By.Id("month")).Click();
-
-            driver.FindElement(By.Id("month")).SendKeys("rtrtrt");
-
-            driver.FindElement(By.Id("year")).Click();
-
-            driver.FindElement(By.Id("year")).SendKeys("rttrtrt");
-            Thread.Sleep(1000);
-
-            driver.FindElement(By.CssSelector("#orderModal .btn-primary")).Click();
-            Thread.Sleep(1000);
-
-            driver.FindElement(By.CssSelector(".confirm")).Click();
-
-            Assert.Fail("Permite Ingresar Datos invalidos");
         }
     }
 }
