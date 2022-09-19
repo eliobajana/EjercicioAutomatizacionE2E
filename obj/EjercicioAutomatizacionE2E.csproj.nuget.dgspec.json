@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jonat\\source\\repos\\EjercicioAutomatizacionE2E\\EjercicioAutomatizacionE2E.csproj": {}
+    "E:\\EjercicioAutomatizacionE2E\\EjercicioAutomatizacionE2E.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jonat\\source\\repos\\EjercicioAutomatizacionE2E\\EjercicioAutomatizacionE2E.csproj": {
+    "E:\\EjercicioAutomatizacionE2E\\EjercicioAutomatizacionE2E.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jonat\\source\\repos\\EjercicioAutomatizacionE2E\\EjercicioAutomatizacionE2E.csproj",
+        "projectUniqueName": "E:\\EjercicioAutomatizacionE2E\\EjercicioAutomatizacionE2E.csproj",
         "projectName": "EjercicioAutomatizacionE2E",
-        "projectPath": "C:\\Users\\jonat\\source\\repos\\EjercicioAutomatizacionE2E\\EjercicioAutomatizacionE2E.csproj",
+        "projectPath": "E:\\EjercicioAutomatizacionE2E\\EjercicioAutomatizacionE2E.csproj",
         "packagesPath": "C:\\Users\\jonat\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jonat\\source\\repos\\EjercicioAutomatizacionE2E\\obj\\",
+        "outputPath": "E:\\EjercicioAutomatizacionE2E\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -44,6 +44,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Microsoft.Graph": {
+              "target": "Package",
+              "version": "[4.40.0, )"
+            },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[17.1.0, )"
@@ -59,6 +63,10 @@
             "NUnit3TestAdapter": {
               "target": "Package",
               "version": "[4.2.1, )"
+            },
+            "Selenium.WebDriver": {
+              "target": "Package",
+              "version": "[4.4.0, )"
             },
             "coverlet.collector": {
               "target": "Package",
