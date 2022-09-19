@@ -1,0 +1,9 @@
+﻿
+Conclusiones:
+
+* Debe permitir agregar la cantidad por cada artículo.
+* No existe control de numeros de caracteres en el formulario de pago.
+* No existe control de caracteres especiales.
+* No existe control de tipo de datos en las cajas de texto del formulario.
+* Permite comprar a pesar de no estar logiado.
+* Permite comprar a pesar de haber ingresado datos invalidos en el formulario de pago.

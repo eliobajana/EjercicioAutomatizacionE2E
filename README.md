@@ -7,3 +7,8 @@ Pasos para Ejecutar los Test manualmente.
 3) Abrir la Ventana de el Explorador de Pruebas. (Barra Pruebas/Exporador de Pruebas).
 4) Ejecutar Todos los Test.
 
+
+NOTA:
+En la carpeta "Reportes" se encuentran Los Casos de Pruebas con los resultados obtenidos.
+Ademas de un video con la ejecuciopn de las pruebas.
+
