@@ -24,7 +24,10 @@ namespace EjercicioAutomatizacionE2E
         [SetUp]
         public void Setup()
         {
-            driver = new ChromeDriver(@"C:\WebDriver\");
+            var DriverFolder = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @".\Resourses\");
+            Console.WriteLine(DriverFolder);
+
+            driver = new ChromeDriver(DriverFolder);
 
             js = (IJavaScriptExecutor)driver;
             vars = new Dictionary<string, object>();
